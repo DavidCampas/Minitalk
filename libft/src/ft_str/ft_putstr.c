@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcampas- <dcampas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 14:44:57 by dcampas-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:23:10 by dcampas-         ###   ########.fr       */
+/*   Created: 2025/01/10 15:50:52 by dcampas-          #+#    #+#             */
+/*   Updated: 2025/01/31 12:12:52 by dcampas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../../inc/libft.h"
 
-# include <signal.h>
-# include "libft/ulibft.h"
+void	ft_putstr(char *str)
+{
+	int	i;
 
-# define ERROR_MSG "Error: Debe ingresar el PID del proceso\n"
-# define NUMBER_PID "The PID must be a number\n"
-# define WRONG_ARG_SERV "Error: Expected no arguments\n"
-# define ERROR_PID "Error: Invalid PID\n"
-
-#endif
+	i = 0;
+	while (str[i])
+		ft_putchar(str[i++]);
+}

@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcampas- <dcampas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 14:44:57 by dcampas-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:23:10 by dcampas-         ###   ########.fr       */
+/*   Created: 2025/01/31 12:11:03 by dcampas-          #+#    #+#             */
+/*   Updated: 2025/01/31 12:11:04 by dcampas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../../inc/libft.h"
 
-# include <signal.h>
-# include "libft/ulibft.h"
-
-# define ERROR_MSG "Error: Debe ingresar el PID del proceso\n"
-# define NUMBER_PID "The PID must be a number\n"
-# define WRONG_ARG_SERV "Error: Expected no arguments\n"
-# define ERROR_PID "Error: Invalid PID\n"
-
-#endif
+void	ft_putnbr(int nb)
+{
+	if (nb == -2147483648)
+	{
+		write (1, "-2147483648", 11);
+		return ;
+	}
+	if (nb < 0)
+	{
+		ft_putchar('-');
+		nb = -1 * nb;
+	}
+	if (nb >= 10)
+	{
+		ft_putnbr (nb / 10);
+	}
+	ft_putchar ((nb % 10) + '0');
+}

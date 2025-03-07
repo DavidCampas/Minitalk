@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dcampas- <dcampas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 14:44:57 by dcampas-          #+#    #+#             */
-/*   Updated: 2025/02/25 11:23:10 by dcampas-         ###   ########.fr       */
+/*   Created: 2024/09/30 15:39:38 by dcampas-          #+#    #+#             */
+/*   Updated: 2025/01/31 12:11:08 by dcampas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_H
-# define MINITALK_H
+#include "../../inc/libft.h"
 
-# include <signal.h>
-# include "libft/ulibft.h"
-
-# define ERROR_MSG "Error: Debe ingresar el PID del proceso\n"
-# define NUMBER_PID "The PID must be a number\n"
-# define WRONG_ARG_SERV "Error: Expected no arguments\n"
-# define ERROR_PID "Error: Invalid PID\n"
-
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write (fd, &c, 1);
+}
+/*
+int main()
+{
+    ft_putchar_fd('A', 1);  // Escribe 'A' en la pantalla
+    ft_putchar_fd('\n', 1); // Escribe un salto de línea en la pantalla
+    ft_putchar_fd('B', 2);  // Escribe 'B' como
+	 un mensaje de error (error estándar)
+    return 0;
+}*/

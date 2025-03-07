@@ -12,7 +12,7 @@ OBJS = ${SRCS:.c=.o}
 # Target binary name
 NAME = minitalk
 CC = cc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -I -g -fsanitize=address
 RM = rm -f
 
 HEADER = minitalk.h
@@ -20,15 +20,22 @@ HEADER = minitalk.h
 CLIENT = client
 SERVER = server
 
+LIBFTDIR = libft/
+LIBFT_LIB = $(LIBFTDIR)/libft.a
+
 # Build everything
-all: $(CLIENT) $(SERVER)
+all: make_libft $(CLIENT) $(SERVER)
 	@echo "$(GREEN)minitalk compilado con éxito.$(DEF_COLOR)"
 
-$(CLIENT): client.o
-	@${CC} ${CFLAGS} client.o -o ${CLIENT}
+make_libft:	
+	@make -C $(LIBFTDIR)
+	@echo "$(GREEN)Libft Done$(DEF_COLOR)"
 
-$(SERVER): server.o
-	@${CC} ${CFLAGS} server.o -o ${SERVER}
+$(CLIENT): client.o $(LIBFT_LIB)
+	@${CC} ${CFLAGS} client.o -o ${CLIENT} -L$(LIBFTDIR) -lft
+
+$(SERVER): server.o $(LIBFT_LIB)
+	@${CC} ${CFLAGS} server.o -o ${SERVER} -L$(LIBFTDIR) -lft
 
 # Compile .c to .o
 %.o: %.c $(HEADER)
@@ -41,11 +48,13 @@ $(NAME): $(OBJS) Makefile $(HEADER)
 # Clean objects
 clean:
 	@${RM} ${OBJS}
+	@cd $(LIBFTDIR) && $(MAKE) clean
 	@echo "$(RED)Objetos eliminados.$(DEF_COLOR)"
 
 # Clean all files
 fclean: clean
 	@${RM} ${CLIENT} ${SERVER}
+	@cd $(LIBFTDIR) && $(MAKE) fclean
 	@echo "$(RED)Ejecutables eliminados.$(DEF_COLOR)"
 
 # Rebuild project

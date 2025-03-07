@@ -6,7 +6,7 @@
 /*   By: dcampas- <dcampas-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 11:13:29 by dcampas-          #+#    #+#             */
-/*   Updated: 2025/02/21 13:17:38 by dcampas-         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:57:43 by dcampas-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,9 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 	static char	c = 0;
 
 	(void)context;
-
 	if (sig == SIGUSR1)
 		c |= (1 << (7 - bit));
 	bit++;
-
 	if (bit == 8)
 	{
 		if (c == '\0')
@@ -38,27 +36,25 @@ void	handle_signal(int sig, siginfo_t *info, void *context)
 
 int	main(int argc, char **argv)
 {
+	struct sigaction	sa;
+
 	if (argc == 1)
 	{
 		(void)argv;
-		struct	sigaction sa;
-	
-		printf("PID del proceso es: %d\n", getpid());
-
+		ft_printf("PID del proceso es: %d\n", getpid());
+		ft_printf("Waiting for signal...\n");
 		sa.sa_flags = SA_SIGINFO;
 		sa.sa_sigaction = handle_signal;
 		sigemptyset(&sa.sa_mask);
-
 		sigaction(SIGUSR1, &sa, NULL);
 		sigaction(SIGUSR2, &sa, NULL);
-	
 		while (1)
 			pause ();
 		return (0);
 	}
 	else
 	{
-		printf(WRONG_ARG_SERV);
+		ft_printf(WRONG_ARG_SERV);
 		return (1);
 	}
 }
